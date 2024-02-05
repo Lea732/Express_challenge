@@ -2,8 +2,6 @@ const express = require("express");
 
 const app = express();
 
-const port = 5000;
-
 const movies = [
   {
     id: 1,
@@ -43,17 +41,11 @@ app.get("/api/movies/:id", (req, res) => {
   const movieId = parseInt(req.params.id);
   const movie = movies.find((m) => m.id === movieId);
 
-  if (movie) {
+  if (movie != null) {
     res.status(200).json(movie);
   } else {
     res.status(404).send("Not Found");
   }
 });
 
-app
-  .listen(port, () => {
-    console.info(`Server is listening on port ${port}`);
-  })
-  .on("error", (err) => {
-    console.error("Error:", err.message);
-  });
+module.exports = app;
